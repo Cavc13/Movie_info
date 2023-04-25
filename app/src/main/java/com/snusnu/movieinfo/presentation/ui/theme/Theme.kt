@@ -1,4 +1,4 @@
-package com.snusnu.movieinfo.ui.theme
+package com.snusnu.movieinfo.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

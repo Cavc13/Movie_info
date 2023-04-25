@@ -1,4 +1,4 @@
-package com.snusnu.movieinfo.ui.theme
+package com.snusnu.movieinfo.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
