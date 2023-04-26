@@ -1,4 +1,4 @@
-package com.snusnu.movieinfo
+package com.snusnu.movieinfo.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.snusnu.movieinfo.ui.theme.MovieInfoTheme
+import com.snusnu.movieinfo.presentation.ui.theme.MovieInfoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
     }
 }
 

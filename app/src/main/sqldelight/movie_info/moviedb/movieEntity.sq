@@ -1,0 +1,28 @@
+CREATE TABLE movieEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    genres TEXT NOT NULL,
+    countries TEXT NOT NULL,
+    year TEXT NOT NULL,
+    lastSync TEXT NOT NULL
+);
+
+getMovieById:
+SELECT *
+FROM movieEntity
+WHERE id = :id;
+
+getMovieByName:
+SELECT *
+FROM movieEntity
+WHERE name = :name;
+
+insertMovie:
+INSERT OR REPLACE
+INTO movieEntity
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+deletMovieById:
+DELETE FROM movieEntity
+WHERE id = :id;
