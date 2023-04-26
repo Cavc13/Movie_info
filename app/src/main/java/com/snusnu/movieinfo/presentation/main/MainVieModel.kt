@@ -38,5 +38,4 @@ class MainVieModel @Inject constructor(
     fun onRequestChange(text: String) {
         request = text
     }
-
 }

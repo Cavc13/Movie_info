@@ -25,7 +25,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "API_URL", "\"https://kinopoiskapiunofficial.tech/api/v2.1/films/\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
+            buildConfigField("String", "API_URL", "\"https://kinopoiskapiunofficial.tech/api/v2.1/films/\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
