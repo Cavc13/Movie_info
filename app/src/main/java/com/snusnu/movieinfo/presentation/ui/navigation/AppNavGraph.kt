@@ -4,12 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.snusnu.movieinfo.domain.Movie
 import com.snusnu.movieinfo.presentation.list_movie.ListMovieViewModel
 import com.snusnu.movieinfo.presentation.ui.screens.description_screen.DescriptionScreen
 import com.snusnu.movieinfo.presentation.ui.screens.list_movie_screen.HomeMovieScreen
-import com.snusnu.movieinfo.presentation.ui.screens.list_movie_screen.ListMovieScreen
 
 @Composable
 fun AppNavGraph(

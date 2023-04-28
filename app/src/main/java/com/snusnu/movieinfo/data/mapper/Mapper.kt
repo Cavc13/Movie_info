@@ -1,6 +1,8 @@
 package com.snusnu.movieinfo.data.mapper
 
-import android.util.Log
+import com.snusnu.movieinfo.data.DataConst.EMPTY_TEXT
+import com.snusnu.movieinfo.data.DataConst.PREFIX_LIST
+import com.snusnu.movieinfo.data.DataConst.SUFFIX_LIST
 import com.snusnu.movieinfo.data.network.dto.Response
 import com.snusnu.movieinfo.domain.Movie
 import com.snusnu.movieinfo.utils.getCurrentDate
@@ -13,7 +15,7 @@ class MovieMapper @Inject constructor() {
         return Movie(
             movieEntity.id,
             movieEntity.name,
-            movieEntity.poster ?: "",
+            movieEntity.poster ?: EMPTY_TEXT,
             movieEntity.description,
             movieEntity.genres,
             movieEntity.countries,
@@ -39,14 +41,14 @@ class MovieMapper @Inject constructor() {
                     nameGenre.genre
                 }
                     .toString()
-                    .removePrefix("[")
-                    .removeSuffix("]"),
+                    .removePrefix(PREFIX_LIST)
+                    .removeSuffix(SUFFIX_LIST),
                 it.countries.map { nameCountry ->
                     nameCountry.country
                 }
                     .toString()
-                    .removePrefix("[")
-                    .removeSuffix("]"),
+                    .removePrefix(PREFIX_LIST)
+                    .removeSuffix(SUFFIX_LIST),
                 it.year,
                 getCurrentDate()
             )

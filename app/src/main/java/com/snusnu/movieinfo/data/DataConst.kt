@@ -4,7 +4,7 @@ import com.snusnu.movieinfo.BuildConfig
 
 object DataConst {
 
-    const val API_GET_MOVIES_BY_NAME = "${BuildConfig.API_URL}search-by-keyword"
+    const val API_GET_MOVIES_BY_KEYWORD = "${BuildConfig.API_URL}search-by-keyword"
     const val PARAM_PAGE = "page"
     const val PARAM_KEYWORD = "keyword"
     const val HEADERS_X_API_KEY = "X-API-KEY"
@@ -12,4 +12,8 @@ object DataConst {
     const val HEADERS_CONTENT_TYPE = "Content-Type"
     const val CONTENT_TYPE = "application/json"
     const val COUNT_OF_PAGE = "1"
+    const val FIRST_EXAMPLE_MOVIE = 0
+    const val EMPTY_TEXT = ""
+    const val PREFIX_LIST = "["
+    const val SUFFIX_LIST = "]"
 }
