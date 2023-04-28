@@ -17,12 +17,19 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logging
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    @IoDispatcher
+    @Provides
+    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+
     @Provides
     @Singleton
     fun provideSqlDriver(app: Application): SqlDriver {
@@ -32,7 +39,6 @@ object AppModule {
             name = "movie.db"
         )
     }
-
     @Provides
     @Singleton
     fun provideHttpClient(): HttpClient {
@@ -57,12 +63,14 @@ object AppModule {
     fun provideMovieDataSource(
         driver: SqlDriver,
         mapper: MovieMapper,
-        client: HttpClient
+        client: HttpClient,
+        ioDispatcher: CoroutineDispatcher
     ): MovieDataSource {
         return MovieDataSourceImpl(
             MovieDatabase(driver),
             mapper,
-            client
+            client,
+            ioDispatcher
         )
     }
 }

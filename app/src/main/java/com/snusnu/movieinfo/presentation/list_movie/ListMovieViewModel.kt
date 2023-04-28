@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -31,9 +30,6 @@ class ListMovieViewModel @Inject constructor(
 
     private val _movies = MutableLiveData<List<Movie>>(emptyList())
     val movies: LiveData<List<Movie>> = _movies
-
-    var movieDetails by mutableStateOf<Movie?>(null)
-        private set
 
     var request by mutableStateOf("")
         private set
@@ -67,12 +63,6 @@ class ListMovieViewModel @Inject constructor(
     fun deleteMovie(id: Long) {
         viewModelScope.launch {
             movieDataSource.deleteMovieById(id)
-        }
-    }
-
-    fun getMovie(id: Long) {
-        viewModelScope.launch {
-            movieDetails = movieDataSource.getMovieById(id)
         }
     }
 

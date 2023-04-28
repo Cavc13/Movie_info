@@ -1,9 +1,5 @@
 package com.snusnu.movieinfo.presentation.ui.screens.list_movie_screen
 
-import android.graphics.drawable.shapes.OvalShape
-import android.util.Log
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -36,9 +31,7 @@ fun CardMovie(
     onCardItemClickListener: (Movie) -> Unit
 ) {
     Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
+        modifier = modifier,
         backgroundColor = MaterialTheme.colors.background,
         shape = RoundedCornerShape(8),
         elevation = 8.dp,
@@ -50,14 +43,13 @@ fun CardMovie(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Log.d("KKK", movie.poster)
             AsyncImage(
                 modifier = Modifier
                     .size(120.dp)
                     .clip(RoundedCornerShape(50))
                     .padding(8.dp),
                 model = movie.poster,
-                contentDescription = "poster of movie"
+                contentDescription = CONTENT_DESCRIPTION_POSTER
             )
             Column(
                 modifier = Modifier
@@ -71,12 +63,16 @@ fun CardMovie(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "${movie.genres.split(",")[0]} (${movie.year})",
+                    text = "${movie.genres.split(SPLIT_GENRE)[FIRST_GENRE]} (${movie.year})",
                     fontSize = 16.sp
                 )
             }
         }
     }
 }
+
+const val CONTENT_DESCRIPTION_POSTER = "постер фильма"
+const val SPLIT_GENRE = ","
+const val FIRST_GENRE = 0
