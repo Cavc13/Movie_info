@@ -3,42 +3,28 @@ package com.snusnu.movieinfo.presentation.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import com.snusnu.movieinfo.presentation.list_movie.ListMovieViewModel
+import com.snusnu.movieinfo.presentation.ui.navigation.AppNavGraph
+import com.snusnu.movieinfo.presentation.ui.navigation.rememberNavigationState
 import com.snusnu.movieinfo.presentation.ui.theme.MovieInfoTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val listMovieViewModel by viewModels<ListMovieViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MovieInfoTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                val navigationState = rememberNavigationState()
+
+                AppNavGraph(
+                    listMovieViewModel = listMovieViewModel,
+                    navHostController = navigationState.navHostController
+                )
             }
         }
 
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MovieInfoTheme {
-        Greeting("Android")
     }
 }

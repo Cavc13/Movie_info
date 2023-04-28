@@ -11,6 +11,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
+import io.ktor.client.request.url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -36,7 +37,7 @@ class MovieDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMovieByName(name: String): List<Movie?> {
+    override suspend fun getMovieByName(name: String): List<Movie> {
         return withContext(Dispatchers.IO) {
             val listMovieEntity = queries.getMovieByName(name).executeAsList()
             if (listMovieEntity.isNotEmpty()) {
@@ -49,6 +50,7 @@ class MovieDataSourceImpl @Inject constructor(
                         insertMovie(
                             it.id,
                             it.name,
+                            it.poster ?: "",
                             it.description,
                             it.genres,
                             it.countries,
@@ -75,6 +77,7 @@ class MovieDataSourceImpl @Inject constructor(
     override suspend fun insertMovie(
         id: Long,
         name: String,
+        poster: String,
         description: String,
         genres: String,
         countries: String,
@@ -85,6 +88,7 @@ class MovieDataSourceImpl @Inject constructor(
             queries.insertMovie(
                 id,
                 name,
+                poster,
                 description,
                 genres,
                 countries,
@@ -97,11 +101,11 @@ class MovieDataSourceImpl @Inject constructor(
     override suspend fun getMoviesFromNetwork(page: String, keyword: String): Response? {
         return try {
             client.get{
-                url{DataConst.API_GET_MOVIES_BY_NAME}
-                parameter(DataConst.PARAM_PAGE, page)
-                parameter(DataConst.PARAM_KEYWORD, keyword)
+                url(DataConst.API_GET_MOVIES_BY_NAME)
                 header(DataConst.HEADERS_X_API_KEY, DataConst.X_API_KEY)
                 header(DataConst.HEADERS_CONTENT_TYPE, DataConst.CONTENT_TYPE)
+                parameter(DataConst.PARAM_PAGE, page)
+                parameter(DataConst.PARAM_KEYWORD, keyword)
             }
         } catch (e: Exception) {
             null
